@@ -34,13 +34,13 @@ RUN chmod -R 777 /app
 RUN mkdir -p logs && chmod 777 logs
 
 
+RUN python manage.py createsuperuser
+
 # 收集静态文件
 RUN python manage.py collectstatic --noinput
 
 # 暴露端口
 EXPOSE 8000
-
-RUN python manage.py createsuperuser
 
 # 启动命令
 CMD ["gunicorn", "inventory.wsgi:application", "--bind", "0.0.0.0:8000"]    
