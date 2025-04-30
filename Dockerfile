@@ -33,7 +33,6 @@ RUN chmod -R 777 /app
 # 创建日志目录并设置权限
 RUN mkdir -p logs && chmod 777 logs
 
-
 RUN python manage.py createsuperuser
 
 # 收集静态文件
