@@ -37,9 +37,9 @@ RUN python manage.py migrate
 COPY create_superuser.py .
 
 # 设置环境变量（这里可以在运行容器时覆盖）
-ENV DJANGO_SUPERUSER_USERNAME=admin
-ENV DJANGO_SUPERUSER_EMAIL=admin@example.com
-ENV DJANGO_SUPERUSER_PASSWORD=adminpassword
+ENV USERNAME=admin
+ENV EMAIL=admin@example.com
+ENV PASSWORD=adminpassword
 
 # 运行创建超级用户的脚本
 RUN python create_superuser.py
