@@ -30,25 +30,14 @@ RUN chmod -R 777 /app
 # 创建日志目录并设置权限
 RUN mkdir -p logs && chmod 777 logs
 
-# 运行 Django 迁移
-RUN python manage.py migrate
-
-# 复制创建超级用户的脚本
-COPY create_superuser.py .
-
-# 设置环境变量（这里可以在运行容器时覆盖）
-ENV DJANGO_SUPERUSER_USERNAME=admin
-ENV DJANGO_SUPERUSER_EMAIL=admin@example.com
-ENV DJANGO_SUPERUSER_PASSWORD=adminpassword
-
-# 运行创建超级用户的脚本
-RUN python create_superuser.py
 
 # 收集静态文件
 RUN python manage.py collectstatic --noinput
 
 # 暴露端口
 EXPOSE 8000
+
+RUN python manage.py createsuperuser
 
 # 启动命令
 CMD ["gunicorn", "inventory.wsgi:application", "--bind", "0.0.0.0:8000"]    
